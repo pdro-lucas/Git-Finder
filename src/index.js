@@ -1,21 +1,22 @@
-import { getUsersData } from './api'
+import { getUsersData } from './api';
 import './index.css';
 
 (function () {
-    const element = document.querySelector('.content');
+  const element = document.querySelector('.content');
 
-    const userData = async () => {
-        const data = await getUsersData('https://api.github.com/users/pdro-lucas');
+  const userData = async () => {
+    const data = await getUsersData('reactjs');
 
-        createElement(data)
-    }
+    createElement(data);
+  };
 
-    function createElement(data) {
-        const userNameElement = document.createElement("img");
-        userNameElement.setAttribute("src", `${data.avatar_url}`)
+  function createElement(data) {
+    const userNameElement = document.createElement('a');
+    userNameElement.innerHTML = "Pedro Lucas Github"
+    userNameElement.setAttribute('href', `${data.html_url}`);
 
-        element.appendChild(userNameElement);
-    }
+    element.appendChild(userNameElement);
+  }
 
-    userData()
+  userData();
 })();
