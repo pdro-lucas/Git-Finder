@@ -1,10 +1,9 @@
-import { getUserData, getUserRepos } from './api';
+import getUserData from './api';
 import './index.css';
 
 (function () {
   const element = document.querySelector('.content');
   const input = document.querySelector('.input');
-  const button = document.querySelector('.repo-button');
 
   function createElement(data) {
     element.innerHTML = `
@@ -28,11 +27,5 @@ import './index.css';
 
     const inputValue = e.target.value;
     timer = setTimeout(() => userData(inputValue), 700);
-  });
-
-  button.addEventListener('click', async () => {
-    const inputData = document.querySelector('.input').value;
-
-    console.log(await getUserRepos(inputData));
   });
 }());
