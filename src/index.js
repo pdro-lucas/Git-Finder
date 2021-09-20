@@ -1,22 +1,31 @@
-import { getUsersData } from './api';
+import getUserData from './api';
 import './index.css';
 
 (function () {
   const element = document.querySelector('.content');
-
-  const userData = async () => {
-    const data = await getUsersData('reactjs');
-
-    createElement(data);
-  };
+  const input = document.querySelector('.input');
 
   function createElement(data) {
-    const userNameElement = document.createElement('a');
-    userNameElement.innerHTML = "Pedro Lucas Github"
-    userNameElement.setAttribute('href', `${data.html_url}`);
-
-    element.appendChild(userNameElement);
+    element.innerHTML = `
+      <img src=${data.avatar_url} alt="User Image">
+    `;
   }
 
-  userData();
-})();
+  const userData = async (user) => {
+    if (user) {
+      const data = await getUserData(user);
+      console.log(data);
+
+      if (data) createElement(data);
+    }
+  };
+
+  let timer = null;
+
+  input.addEventListener('keyup', (e) => {
+    clearTimeout(timer);
+
+    const inputValue = e.target.value;
+    timer = setTimeout(() => userData(inputValue), 700);
+  });
+}());
